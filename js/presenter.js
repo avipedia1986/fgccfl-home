@@ -1,24 +1,11 @@
-var view = 'league';
-
-setView = function() {
-    v = $.query.get('view');
-    if (v == 'league' || v == 'tournaments' || v == 'join') {
-        view = v;
-    }
-};
-
-loadView = function() {
-    $('#link-' + view).addClass('active');
-    $.get('view/' + view + '.html', '', showInMain);
-};
-
-showInMain = function(txt, stat, xhr) {
-    $('main').html(txt);
-};
+var curView = 'league';
 
 $(document).ready(function() {
-    setView();
-    loadView();
+    curView = $.query.get('view');
+    $('#link-' + curView).addClass('active');
+    $.get('view/' + curView + '.html', '', function(txt) {
+        $('main').html(txt);
+    });
 });
 
 
